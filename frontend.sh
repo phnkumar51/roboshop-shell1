@@ -25,6 +25,6 @@ cd /usr/share/nginx/html
 echo -e "\e[35mDisable Nginx\e[0m"
 unzip /tmp/frontend.zip
 
-echo -e "\e[31Restart Nginx\e[0m"
+echo -e "\e[36mRestart Nginx\e[0m"
 systemctl enable nginx
 systemctl restart nginx
