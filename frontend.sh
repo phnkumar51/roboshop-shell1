@@ -1,31 +1,33 @@
 # To print the colour follow the below syntax
 # echo -e"\e[COLmxxxxx\e[0m
 
-
-echo -e "\e[31mDisable Nginx\e[0m"
+print_head(){
+  echo -e "\e[36m$*\e[0m"
+}
+print_head Disable Default Nginx
 dnf module disable nginx -y >>/tmp/roboshop.log
 
 
-echo -e "\e[32mEnable Nginx\e[0m"
+print_head Enable Nginx
 dnf module enable nginx:1.24 -y >>/tmp/roboshop.log
 
-echo -e "\e[33mInstall Nginx\e[0m"
+print_head Install Nginx
 dnf install nginx -y >>/tmp/roboshop.log
 
-echo -e "\e[34mcopy Nginx Conf file\e[0m"
+print_head copy Nginx Conf file
 cp nginx.conf /etc/nginx/nginx.conf >>/tmp/roboshop.log
 
-echo -e "\e[35mremove the old content in Nginx\e[0m"
+print_head remove the old content in Nginx
 rm -rf /usr/share/nginx/html/* >>/tmp/roboshop.log
 
-echo -e "\e[35mDownload Nginx content\e[0m"
+print_head Download Nginx content
 curl -o /tmp/frontend.zip https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip >>/tmp/roboshop.log
 cd /usr/share/nginx/html >>/tmp/roboshop.log >>/tmp/roboshop.log
 
-echo -e "\e[35mDisable Nginx\e[0m"
+print_head Disable Nginx
 unzip /tmp/frontend.zip >>/tmp/roboshop.log
 
-echo -e "\e[36mRestart Nginx\e[0m"
+print_head Restart Nginx\e
 systemctl enable nginx >>/tmp/roboshop.log
 systemctl restart nginx >>/tmp/roboshop.log
 
