@@ -1,6 +1,7 @@
 systemd_setup(){
   print_head Copy SystemD service files
   cp $component.service /etc/systemd/system/$component.service &>>$log_file
+  echo $?
 
 
  print_head Enable and Restart the Service
@@ -15,33 +16,42 @@ systemd_setup(){
 artifact_download(){
   print_head add an application user
   useradd roboshop &>>$log_file
+  echo $?
 
   print_head remove the exisiting content
   rm -rf /app &>>$log_file
+  echo $?
 
   print_head Create an application directory
   mkdir /app &>>$log_file
+  echo $?
 
   print_head Download the content
   curl -L -o /tmp/$component.zip https://roboshop-artifacts.s3.amazonaws.com/$component-v3.zip &>>$log_file
+  echo $?
   cd /app
 
   print_head Extract the files
   unzip /tmp/$component.zip &>>$log_file
+  echo $?
 
 }
 
 nodejs(){
   print_head Disable nodejs
   dnf module disable nodejs -y &>>$log_file
+  echo $?
 
   print_head enable and Install nodejs 20
   dnf module enable nodejs:20 -y &>>$log_file
+  echo $?
 
   dnf install nodejs -y &>>$log_file
+  echo $?
 
   useradd roboshop
   cp $component.service /etc/systemd/system/$component.service &>>$log_file
+  echo $?
 
   artifact_download
   cd /app
@@ -54,6 +64,7 @@ nodejs(){
 maven_app_setup(){
   print_head Install Java Maven services
   dnf install maven -y &>>$log_file
+  echo $?
 
   artifact_download
   cd /app &>>$log_file
