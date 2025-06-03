@@ -46,12 +46,13 @@ nodejs(){
   dnf module enable nodejs:20 -y &>>$log_file
   echo $?
 
+  print_head Install Nodejs
   dnf install nodejs -y &>>$log_file
   echo $?
 
-  useradd roboshop
-  cp $component.service /etc/systemd/system/$component.service &>>$log_file
-  echo $?
+ # useradd roboshop
+ # cp $component.service /etc/systemd/system/$component.service &>>$log_file
+ # echo $?
 
   artifact_download
   cd /app
