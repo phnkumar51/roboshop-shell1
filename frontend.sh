@@ -3,6 +3,9 @@
 
 print_head(){
   echo -e "\e[36m$*\e[0m"
+  echo "################################" >>log_file
+  echo -e "\e[36m$*\e[0m"
+  echo "################################" >>log_file
 }
 
 log_file=/tmp/roboshop.log
